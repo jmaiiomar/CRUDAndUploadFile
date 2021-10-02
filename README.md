@@ -1,8 +1,10 @@
-# CRUDAndUploadFile
- 
+# 📣 About 
+
 this repo conatines methode allow user uplaod file using Angular and symfony4.4  and CRUD for an entitie
 
 
+# 📣 Usage 
+In the Controller symfony:
 ```Symfony
 
  /**
@@ -29,3 +31,55 @@ this repo conatines methode allow user uplaod file using Angular and symfony4.4 
         return new JsonResponse( $formatted);
     }
 ```
+In component.ts symfony: 
+in your FormController 
+```Angular
+  fileSource: new FormControl('', [Validators.required]),
+```
+Add  onFileChange finction
+
+```Angular
+ onFileChange(event: any) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.imageSrc = reader.result as string;
+
+        this.myform.patchValue({
+          fileSource: reader.result,
+        });
+      };
+    }
+  }
+  ```
+  Your Function with other attributes in your Form
+  ```Angular
+
+   add(): void {
+    const data = this.myform.value;
+    const formData = new FormData();
+    console.log(data.fileSource)
+    formData.append('image', data.fileSource);
+    this.http
+      .post('http://127.0.0.1:8000/article/upload', formData)
+      .subscribe((resu) => {
+       let art={
+         "title":data.title,
+          "category":data.category,
+          "description":data.description,
+          "image":resu
+
+       }
+        console.log(resu)
+        this.articleService.addArticle(art).subscribe((res) => {
+          alert('ok !');
+          this.refresh();
+        });
+      });
+  }
+  ```
