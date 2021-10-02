@@ -1,7 +1,6 @@
 # 📣 About 
 
-this repo conatines methode allow user uplaod file using Angular and symfony4.4  and CRUD for an entitie
-
+this repo contains method allow user upload file using Angular and symfony 4.4 and conatains CURD methods for an entity
 
 # 📣 Usage 
 In the Controller symfony:
