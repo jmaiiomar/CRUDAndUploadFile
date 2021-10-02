@@ -3,7 +3,8 @@
 this repo conatines methode allow user uplaod file using Angular and symfony4.4  and CRUD for an entitie
 
 
-<code>
+```Symfony
+
  /**
      * @Route("/upload", name="uploadimag", methods={"GET","POST"})
      */
@@ -27,4 +28,4 @@ this repo conatines methode allow user uplaod file using Angular and symfony4.4 
         $formatted = $serializer->normalize($imagename);
         return new JsonResponse( $formatted);
     }
-</code>
+```
